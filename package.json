@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20"
+  },
+  "name": "w5_todoproject_6t",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sparta-w5-6/todo-alert.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sparta-w5-6/todo-alert/issues"
+  },
+  "homepage": "https://github.com/sparta-w5-6/todo-alert#readme",
+  "devDependencies": {
+    "sequelize": "^6.26.0",
+    "sequelize-cli": "^6.5.2"
+  }
+}
