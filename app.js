@@ -1,31 +1,31 @@
-const express = require("express")
-const app = express()
-const { sequelize } = require("./models")
+const express = require('express');
+const app = express();
+const { sequelize } = require('./models');
 
-require("dotenv").config()
-const port = process.env.PORT || 3000
-const router = require("./routes")
+require('dotenv').config();
+const port = process.env.PORT || 3000;
+const router = require('./routes');
 
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log("데이터베이스 연결 성공")
+    console.log('데이터베이스 연결 성공');
   })
   .catch((err) => {
-    console.error(err)
-  })
+    console.error(err);
+  });
 
-const router = require("./routes")
+const router = require('./routes');
 
-const cookieParser = require("cookie-parser")
-app.use(cookieParser())
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
-app.use(express.json())
+app.use(express.json());
 
-app.use("/api", router)
+app.use('/api', router);
 
 app.listen(port, () => {
-  console.log(port, " server is opened")
-})
+  console.log(port, ' server is opened');
+});
 
-module.exports = app
+module.exports = app;
