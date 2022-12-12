@@ -2,9 +2,6 @@ const { Users } = require('../models');
 const { Op } = require('sequelize');
 
 class SignupRepository {
-  constructor(userModel) {
-    this.userModel = userModel;
-  }
   registerUser = async (email, nickname, password) => {
     const registerUserData = await Users.create({ email, nickname, password });
     return registerUserData;
