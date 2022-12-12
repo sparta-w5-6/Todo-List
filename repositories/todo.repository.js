@@ -31,7 +31,7 @@ class TodoRepository {
     const todo = await Todos.findOne({ where: { todoId, userId } });
 
     if (!todo) {
-      throw new Error('todo item이 존재하지 않습니다');
+      throw new Error('NO_EXISTS_TODO');
     }
 
     todo.isDone = !todo.isDone;
