@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Comments extends Model {
     /**
@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Users, { foreignKey: "userId" });
-      this.belongsTo(models.Todos, { foreignKey: "todoId" });
+      this.belongsTo(models.Users, { foreignKey: 'userId' });
+      this.belongsTo(models.Todos, { foreignKey: 'todoId' });
     }
   }
   Comments.init(
@@ -22,13 +22,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         type: DataTypes.INTEGER,
-        references: { model: "Users", key: "userId" },
-        onDelete: "CASCADE",
+        references: { model: 'Users', key: 'userId' },
+        onDelete: 'CASCADE',
       },
       todoId: {
         type: DataTypes.INTEGER,
-        references: { model: "Todos", key: "todoId" },
-        onDelete: "CASCADE",
+        references: { model: 'Todos', key: 'todoId' },
+        onDelete: 'CASCADE',
       },
       comment: {
         type: DataTypes.STRING,
@@ -44,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Comments",
-    }
+      modelName: 'Comments',
+    },
   );
   return Comments;
 };
