@@ -42,7 +42,7 @@ class TodoService {
   };
   doneTodo = async (todoId, userId) => {
     return this.TodoRepository.doneTodo(todoId, userId);
-  }
+  };
 }
 
 module.exports = TodoService;

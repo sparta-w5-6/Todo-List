@@ -40,7 +40,7 @@ class TodoRepository {
     await todo.save();
 
     return todo.isDone;
-  }
+  };
 }
 
 module.exports = TodoRepository;
