@@ -14,12 +14,12 @@ module.exports = {
         references: { model: 'Users', key: 'userId' },
         onDelete: 'CASCADE',
       },
-      postId: {
+      todoId: {
         type: Sequelize.INTEGER,
-        references: { model: 'Posts', key: 'postId' },
+        references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
       },
-      content: {
+      comment: {
         type: Sequelize.STRING,
       },
       createdAt: {

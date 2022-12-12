@@ -9,9 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      postId: {
+      todoId: {
         type: Sequelize.INTEGER,
-        references: { model: 'Posts', key: 'postId' },
+        references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
       },
 
@@ -20,7 +20,6 @@ module.exports = {
         references: { model: 'Users', key: 'userId' },
         onDelete: 'CASCADE',
       },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

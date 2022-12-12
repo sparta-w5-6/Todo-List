@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Users, { foreignKey: 'userId' });
-      this.belongsTo(models.Todos, { foreignKey: 'commentId' });
       this.belongsTo(models.Todos, { foreignKey: 'todoId' });
     }
   }
@@ -27,13 +26,12 @@ module.exports = (sequelize, DataTypes) => {
         references: { model: 'Users', key: 'userId' },
         onDelete: 'CASCADE',
       },
-      todostId: {
+      todoId: {
         type: DataTypes.INTEGER,
         references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
       },
-
-      content: {
+      comment: {
         type: DataTypes.STRING,
       },
       createdAt: {
@@ -50,7 +48,6 @@ module.exports = (sequelize, DataTypes) => {
 
       modelName: 'Comments',
     },
-
   );
   return Comments;
 };
