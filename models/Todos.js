@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Todos extends Model {
     /**
@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     // Posts -- Users : N:1
     static associate(models) {
-      this.belongsTo(models.Users, { foreignKey: "userId" });
-      this.hasMany(models.Comments, { foreignKey: "todoId" });
-      this.hasMany(models.Likes, { foreignKey: "todoId" });
+      this.belongsTo(models.Users, { foreignKey: 'userId' });
+      this.hasMany(models.Comments, { foreignKey: 'todoId' });
+      this.hasMany(models.Likes, { foreignKey: 'todoId' });
     }
   }
   Todos.init(
@@ -25,10 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         references: {
-          model: "Users", // Users 테이블에
-          key: "userId", // userId column 과 관계를 맺음
+          model: 'Users', // Users 테이블에
+          key: 'userId', // userId column 과 관계를 맺음
         },
-        onDelete: "CASCADE",
+        onDelete: 'CASCADE',
         allowNull: false,
         unique: true,
       },
@@ -55,8 +55,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Todos",
-    }
+      modelName: 'Todos',
+    },
   );
   return Todos;
 };

@@ -1,4 +1,4 @@
-const { Comments } = require("../models");
+const { Comments } = require('../models');
 
 class CommentRepository {
   createComment = async (comment, userId, todoId) => {

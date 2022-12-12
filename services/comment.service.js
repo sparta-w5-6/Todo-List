@@ -19,6 +19,7 @@ class CommentService {
       userId,
       todoId,
     );
+    console.log("createComment", createComment);
 
     return {
       commentId: createComment.commentId,

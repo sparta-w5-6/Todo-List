@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/sparta-w5-6/todo-alert#readme",
   "devDependencies": {
+    "prettier": "^2.8.1",
     "sequelize": "^6.26.0",
     "sequelize-cli": "^6.5.2"
   }

@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Likes extends Model {
     /**
@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Users, { foreignKey: "userId" });
-      this.belongsTo(models.Todos, { foreignKey: "todoId" });
+      this.belongsTo(models.Users, { foreignKey: 'userId' });
+      this.belongsTo(models.Todos, { foreignKey: 'todoId' });
     }
   }
   Likes.init(
@@ -22,14 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       todoId: {
         type: DataTypes.INTEGER,
-        references: { model: "Todos", key: "todoId" },
-        onDelete: "CASCADE",
+        references: { model: 'Todos', key: 'todoId' },
+        onDelete: 'CASCADE',
       },
 
       userId: {
         type: DataTypes.INTEGER,
-        references: { model: "Users", key: "userId" },
-        onDelete: "CASCADE",
+        references: { model: 'Users', key: 'userId' },
+        onDelete: 'CASCADE',
       },
       isLike: {
         type: DataTypes.BOOLEAN,
@@ -45,8 +45,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Likes",
-    }
+      modelName: 'Likes',
+    },
   );
   return Likes;
 };
