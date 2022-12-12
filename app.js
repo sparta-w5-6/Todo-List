@@ -4,9 +4,10 @@ const { sequelize } = require("./models");
 
 require("dotenv").config();
 const port = process.env.PORT || 3000;
+const router = require("./routes");
 
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
@@ -14,7 +15,7 @@ sequelize
     console.error(err);
   });
 
-const router = require("./routes");
+
 
 app.use(express.json());
 
