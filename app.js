@@ -4,7 +4,6 @@ const { sequelize } = require('./models');
 
 require('dotenv').config();
 const port = process.env.PORT || 3000;
-const router = require('./routes');
 
 sequelize
   .sync({ force: false })

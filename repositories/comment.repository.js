@@ -1,12 +1,16 @@
 const { Comments } = require('../models');
 
 class CommentRepository {
+  constructor(model) {
+    this.Comments = model;
+  }
+
   createComment = async (comment, userId, todoId) => {
     const createComment = await Comments.create({ comment, userId, todoId });
     return createComment;
   };
 
-  findAllComment = async () => {
+  findAllComment = async ({}) => {
     const findAllComment = await Comments.findAll({});
     return findAllComment;
   };
@@ -19,7 +23,7 @@ class CommentRepository {
   updateComment = async (commentId, comment) => {
     const updateComment = await Comments.update(
       { comment },
-      { where: { commentId } }
+      { where: { commentId } },
     );
     return updateComment;
   };
