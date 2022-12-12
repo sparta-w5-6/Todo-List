@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Comments extends Model {
     /**
@@ -9,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Users, { foreignKey: 'userId' });
+      this.belongsTo(models.Todos, { foreignKey: 'commentId' });
       this.belongsTo(models.Todos, { foreignKey: 'todoId' });
     }
   }
@@ -25,12 +27,13 @@ module.exports = (sequelize, DataTypes) => {
         references: { model: 'Users', key: 'userId' },
         onDelete: 'CASCADE',
       },
-      todoId: {
+      todostId: {
         type: DataTypes.INTEGER,
         references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
       },
-      comment: {
+
+      content: {
         type: DataTypes.STRING,
       },
       createdAt: {
@@ -44,8 +47,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+
       modelName: 'Comments',
     },
+
   );
   return Comments;
 };

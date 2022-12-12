@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Likes extends Model {
     /**
@@ -31,9 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         references: { model: 'Users', key: 'userId' },
         onDelete: 'CASCADE',
       },
+
       isLike: {
         type: DataTypes.BOOLEAN,
       },
+
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
