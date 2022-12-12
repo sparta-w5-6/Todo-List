@@ -60,8 +60,8 @@ class TodoController {
     } catch (error) {
       console.error(error);
 
-      if (error.message === 'todo item이 존재하지 않습니다') {
-        res.status(404).json({ errorMessage: error.message });
+      if (error.message === 'NO_EXISTS_TODO') {
+        res.status(404).json({ errorMessage: 'todo item이 존재하지 않습니다' });
       } else {
         res.status(500).json({ errorMessage: '알 수 없는 오류 발생' });
       }
