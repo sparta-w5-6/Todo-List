@@ -30,6 +30,10 @@ class TodoRepository {
   doneTodo = async (todoId, userId) => {
     const todo = await Todos.findOne({ where: { todoId, userId } });
 
+    if (!todo) {
+      throw new Error('todo item이 존재하지 않습니다');
+    }
+
     todo.isDone = !todo.isDone;
     todo.updatedAt = new Date();
 
