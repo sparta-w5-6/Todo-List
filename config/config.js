@@ -9,10 +9,10 @@ module.exports = {
     dialect: "mysql",
   },
   test: {
-    username: "root",
-    password: "skwldnjs1!",
+    username: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
     database: "w5-6T_test_db",
-    host: "express-db2.cta1pnnjerr0.ap-northeast-2.rds.amazonaws.com",
+    host: process.env.HOST,
     dialect: "mysql",
   },
   production: {
