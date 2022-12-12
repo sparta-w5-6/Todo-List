@@ -17,11 +17,12 @@ class TodoRepository {
     return find;
   };
 
-  updateTodo = async (todoId, title, item, userId) => {
-    const update = await Todos.update(
-      { title, item },
-      { where: { todoId, userId } },
-    );
+  findTodoList = async (todoId) => {
+    const todo = await Todos.findOne({ todoId });
+    return todo;
+  };
+  updateTodo = async (todoId, title, item) => {
+    const update = await Todos.update({ title, item }, { where: { todoId } });
     console.log('update: ', update);
 
     return update;

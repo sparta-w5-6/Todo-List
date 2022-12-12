@@ -30,10 +30,12 @@ class TodoController {
       const { title, item } = req.body;
       const { userId } = res.locals.user;
 
+      // trouble shooting
+      // 인자 순서 맞춥시다......
       const update = await this.TodoService.updateTodo(
+        todoId,
         title,
         item,
-        todoId,
         userId,
       );
       console.log('update controller: ', update);
