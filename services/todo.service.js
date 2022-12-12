@@ -40,6 +40,9 @@ class TodoService {
 
     return update;
   };
+  doneTodo = async (todoId, userId) => {
+    await this.TodoRepository.doneTodo(todoId, userId);
+  }
 }
 
 module.exports = TodoService;
