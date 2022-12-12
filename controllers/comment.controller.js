@@ -25,9 +25,9 @@ class CommentController {
       return res
         .status(200)
         .json({ message: '댓글을 생성하였습니다.', result: createComment });
-    } catch (err) {
-      console.error(err);
-      return res.status(400).send('fail');
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
     }
   };
 
@@ -35,9 +35,24 @@ class CommentController {
     try {
       const findAllComment = await this.commentService.findAllComment({});
       return res.status(200).json({ result: findAllComment });
-    } catch (err) {
-      console.error(err);
-      return res.status(400).send('fail');
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
+    }
+  };
+
+  updateComment = async (req, res, next) => {
+    const { comment } = req.body;
+    const { commentId } = req.params;
+    const user = res.locals.user;
+
+    try {
+      await this.commentService.updateComment(commentId, user, comment);
+
+      return res.status(200).json({ message: '댓글 수정 완료' });
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
     }
   };
 }
