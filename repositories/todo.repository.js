@@ -28,10 +28,14 @@ class TodoRepository {
   };
 
   doneTodo = async (todoId, userId) => {
-    await Todos.update(
-      { where: { todoId, userId } },
-      { isDone: true, updatedAt: new Date() },
-    );
+    const todo = await Todos.findOne({ where: { todoId, userId } });
+
+    todo.isDone = !todo.isDone;
+    todo.updatedAt = new Date();
+
+    await todo.save();
+
+    return todo.isDone;
   }
 }
 

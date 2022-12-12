@@ -50,9 +50,13 @@ class TodoController {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
 
-      await this.TodoService.doneTodo(todoId, userId);
+      const result = await this.TodoService.doneTodo(todoId, userId);
 
-      res.status(200).json({ result: true, message: '완료를 축하합니다' });
+      if (result) {
+        res.status(200).json({ result, message: '완료를 축하합니다' });
+      } else {
+        res.status(200).json({ result, message: '취소 완료' });
+      }
     } catch (error) {
       console.error(error);
       res.status(400).json({ errorMessage: error.message });

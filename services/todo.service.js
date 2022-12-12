@@ -41,7 +41,7 @@ class TodoService {
     return update;
   };
   doneTodo = async (todoId, userId) => {
-    await this.TodoRepository.doneTodo(todoId, userId);
+    return this.TodoRepository.doneTodo(todoId, userId);
   }
 }
 
