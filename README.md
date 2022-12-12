@@ -15,6 +15,8 @@
 # 개발 규칙
 - .gitignore 파일 생성 - gitignore.io 이용해서 커밋 하기
 - 3-Layered Architecture 적용
+- 각자 브랜치에서 작업 후 develop 에서 merge(ex. signup_feature001 , comment_feature002)
+- merge 후 본인 브랜치 삭제 후 feature +1 해서 브랜치 새로 생성
 
 # 파트 분배
 - 로그인/회원가입 - 나지원
