@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         references: { model: 'Users', key: 'userId' },
         onDelete: 'CASCADE',
       },
-      todostId: {
+      todoId: {
         type: DataTypes.INTEGER,
         references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
@@ -50,7 +50,6 @@ module.exports = (sequelize, DataTypes) => {
 
       modelName: 'Comments',
     },
-
   );
   return Comments;
 };
