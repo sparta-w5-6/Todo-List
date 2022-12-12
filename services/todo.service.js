@@ -19,7 +19,8 @@ class TodoService {
     });
     return todo;
   };
-  updateTodo = async (todoId, title, item, userId) => {
+
+  updateTodo = async (todoId, title, item) => {
     //todo 게시글이 존재하지 않을 경우 에러 처리
     // const todoExists = await this.TodoRepository.findOne(todoId);
     // console.log('todoExists:', todoExists);
@@ -30,15 +31,15 @@ class TodoService {
     // if (!title || !item) {
     //   throw new Error('입력 값이 올바르지 않습니다');
     // }
-    const update = await this.TodoRepository.updateTodo(
-      todoId,
-      title,
-      userId,
-      item,
-    );
-    console.log('update Index: ', update[0]);
+    console.log('여기에요여기', todoId);
+    await this.TodoRepository.updateTodo(todoId, title, item);
 
-    return update;
+    // console.log('update Index: ', update[0]);
+    const updateTodoList = await this.TodoRepository.findTodoList({
+      todoId,
+    });
+    console.log('여기에요', updateTodoList);
+    return updateTodoList;
   };
 }
 
