@@ -22,13 +22,21 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         type: DataTypes.INTEGER,
-        references: { model: "Users", key: "userId" },
+        references: {
+          model: "Users", // Users 테이블에
+          key: "userId", // userId column 과 관계를 맺음
+        },
         onDelete: "CASCADE",
+        allowNull: false,
       },
       todoId: {
         type: DataTypes.INTEGER,
-        references: { model: "Todos", key: "todoId" },
+        references: {
+          model: "Todos", // Todos 테이블에
+          key: "todoId", // todoId column 과 관계를 맺음
+        },
         onDelete: "CASCADE",
+        allowNull: false,
       },
       comment: {
         type: DataTypes.STRING,
