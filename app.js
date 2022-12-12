@@ -1,18 +1,27 @@
-const express = require("express")
-const app = express()
-require("dotenv").config()
-const port = process.env.PORT || 3000
+const express = require("express");
+const app = express();
+const { sequelize } = require("./models");
 
-const router = require("./routes")
+require("dotenv").config();
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
+sequelize
+  .sync({ force: true })
+  .then(() => {
+    console.log("데이터베이스 연결 성공");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
-app.use("/api", router)
+const router = require("./routes");
+
+app.use(express.json());
+
+app.use("/api", router);
 
 app.listen(port, () => {
-  console.log(port, " server is opened")
-})
+  console.log(port, " server is opened");
+});
 
-module.exports = app
-
-// .env
+module.exports = app;
