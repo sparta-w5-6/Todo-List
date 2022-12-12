@@ -37,4 +37,4 @@ module.exports = {
 
 
 #ERD
-![스크린샷 2022-12-10 오후 4 16 17](https://user-images.githubusercontent.com/105340187/206837691-29d267a6-7bf2-4823-9f7e-6a5e826303f8.png)
+![스크린샷 2022-12-12 오전 10 13 05](https://user-images.githubusercontent.com/105340187/206941298-290c5214-ab90-4d38-b08b-62e7570ba381.png)
