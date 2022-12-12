@@ -12,6 +12,7 @@ class SignupController {
       return res.status(201).json({ message: "회원가입을 축하드립니다." })
     } catch (error) {
       console.log(error)
+
       res.status(400).json({ errorMessage: error.message })
     }
   }
