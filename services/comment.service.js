@@ -19,7 +19,7 @@ class CommentService {
       userId,
       todoId
     );
-    console.log('createComment',createComment)
+    console.log("createComment", createComment);
 
     return {
       commentId: createComment.commentId,
@@ -29,6 +29,14 @@ class CommentService {
       createdAt: createComment.createdAt,
       updatedAt: createComment.updatedAt,
     };
+  };
+
+  findAllComment = async () => {
+    const findAllComment = await this.commentRepository.findAllComment({});
+    findAllComment.sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
+    return findAllComment;
   };
 }
 
