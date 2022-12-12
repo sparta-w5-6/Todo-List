@@ -2,8 +2,10 @@ const { Users } = require("../models")
 
 class LoginRepository {
   findUser = async (email) => {
-    const findUserData = await Users.findOne({ where: { email } })
-    return findUserData
+    // Users DB 에서 userId와 email을 가져온다.
+    const users = await Users.findOne({ where: { email } })
+
+    return users
   }
 }
 
