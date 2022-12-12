@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Todos extends Model {
     /**
@@ -32,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
-
       title: {
         type: DataTypes.STRING,
       },
@@ -56,6 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+
       modelName: 'Todos',
     }
   );

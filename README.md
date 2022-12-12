@@ -35,8 +35,9 @@ module.exports = {
 
 
 # API 명세서
-![스크린샷 2022-12-10 오전 12 26 40](https://user-images.githubusercontent.com/105340187/206837661-bb8ed203-36b8-436e-800f-4065a93dca85.png)
+![스크린샷 2022-12-12 오후 12 39 03](https://user-images.githubusercontent.com/105340187/206955698-fd11f9b6-63f9-49c4-9604-450c3c09c49e.png)
 
 
 #ERD
-![스크린샷 2022-12-12 오전 10 13 05](https://user-images.githubusercontent.com/105340187/206941298-290c5214-ab90-4d38-b08b-62e7570ba381.png)
+![스크린샷 2022-12-12 오후 12 42 58](https://user-images.githubusercontent.com/105340187/206955920-fe8bfdd5-7945-4bc6-8b02-a7ad7a26e560.png)
+
