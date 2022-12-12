@@ -44,6 +44,20 @@ class TodoController {
       res.status(400).json({ errorMessage: error.message });
     }
   };
+
+  doneTodo = async (req, res) => {
+    try {
+      const { todoId } = req.params;
+      const { userId } = res.locals.user;
+
+      await this.TodoService.doneTodo(todoId, userId);
+
+      res.status(200).json({ result: true, message: '완료를 축하합니다' });
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
+    }
+  }
 }
 
 module.exports = TodoController;
