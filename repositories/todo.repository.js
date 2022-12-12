@@ -12,6 +12,20 @@ class TodoRepository {
     });
     return todo;
   };
+  findOne = async (todoId, userId) => {
+    const find = await Todos.findOne({ where: { todoId, userId } });
+    return find;
+  };
+
+  updateTodo = async (todoId, title, item, userId) => {
+    const update = await Todos.update(
+      { title, item },
+      { where: { todoId, userId } },
+    );
+    console.log('update: ', update);
+
+    return update;
+  };
 }
 
 module.exports = TodoRepository;

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const router = require('./routes');
 const { sequelize } = require('./models');
 const {
   errorHandler,
@@ -17,8 +18,6 @@ sequelize
   .catch((err) => {
     console.error(err);
   });
-
-const router = require('./routes');
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
