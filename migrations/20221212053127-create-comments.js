@@ -19,7 +19,7 @@ module.exports = {
         references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
       },
-      content: {
+      comment: {
         type: Sequelize.STRING,
       },
       createdAt: {

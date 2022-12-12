@@ -31,8 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         references: { model: 'Todos', key: 'todoId' },
         onDelete: 'CASCADE',
       },
-
-      content: {
+      comment: {
         type: DataTypes.STRING,
       },
       createdAt: {
