@@ -26,6 +26,13 @@ class TodoRepository {
 
     return update;
   };
+
+  doneTodo = async (todoId, userId) => {
+    await Todos.update(
+      { where: { todoId, userId } },
+      { isDone: true, updatedAt: new Date() },
+    );
+  }
 }
 
 module.exports = TodoRepository;
