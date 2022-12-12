@@ -1,6 +1,7 @@
 const LoginService = require('../services/login.service');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY;
+const ValidationError = require('../exception/index.exception');
 
 class LoginController {
   loginService = new LoginService();
@@ -14,7 +15,8 @@ class LoginController {
       res.status(201).json({ token });
     } catch (error) {
       console.log(error);
-      res.status(400).json({ errorMessage: error.message });
+      res.status(error.status || 400);
+      res.json({ errorMessage: error.message });
     }
   };
 }
