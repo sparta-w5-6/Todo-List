@@ -1,22 +1,19 @@
 const CommentRepository = require('../repositories/comment.repository');
+const TodoRepository = require('../repositories/todo.repository');
 
 class CommentService {
   commentRepository = new CommentRepository();
+  todoRepository = new TodoRepository();
 
   createComment = async (comment, userId, todoId) => {
-    // 댓글 내용이 존재하는지 체크
     if (!comment) {
       throw new Error('comment 내용을 적어주세요.');
     }
 
-    /**
-     * TODO TodoList 기능개발 완료 후 TodoRepository에서 findOne으로 Todo게시글 가져와서
-     * 존재 여부 확인할 것
-     * 게시글이 존재하는지 체크
-        if (temp) {
-          throw new Error('게시글이 없습니다.');
-        }
-     */
+    const todo = this.todoRepository.findTodoList(todoId);
+    if (!todo) {
+      throw new Error('게시글이 없습니다.');
+    }
 
     const createComment = await this.commentRepository.createComment(
       comment,
@@ -46,7 +43,7 @@ class CommentService {
   updateComment = async (commentId, user, comment) => {
     const isComment = await this.commentRepository.findOneComment(commentId);
 
-    if (isComment.commentId !== user.userId) {
+    if (isComment.userId !== user.userId) {
       throw new Error('댓글이 없습니다.');
     }
 
@@ -62,7 +59,23 @@ class CommentService {
     if (!updateComment) {
       throw new Error('게시글이 없습니다.');
     }
-    return updateComment;
+    return {
+      commentId: updateComment.commentId,
+      userId: updateComment.userId,
+      comment: updateComment.comment,
+      editCheck: 'true',
+      createdAt: updateComment.createdAt,
+      updatedAt: updateComment.updatedAt,
+    };
+  };
+
+  deleteComment = async (commentId) => {
+    const isComment = await this.commentRepository.findOneComment(commentId);
+    if (!isComment) {
+      throw new Error('댓글이 없습니다.');
+    }
+    const result = await this.commentRepository.deleteComment(commentId);
+    return result;
   };
 }
 
