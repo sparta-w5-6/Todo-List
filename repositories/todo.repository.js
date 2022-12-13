@@ -12,9 +12,14 @@ class TodoRepository {
     });
     return todo;
   };
-
+  findAllTodoList = async ({}) => {
+    const findAllTodoList = await Todos.findAll({});
+    return findAllTodoList;
+  };
   findTodoList = async (todoId) => {
-    const todo = await Todos.findOne({ todoId });
+    const todo = await Todos.findOne({ where: { todoId } });
+    console.log('todo: ', todo);
+
     return todo;
   };
   updateTodo = async (todoId, title, item) => {

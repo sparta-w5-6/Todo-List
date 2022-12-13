@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         onDelete: 'CASCADE',
         allowNull: false,
-        unique: true,
+        // unique: true,
       },
       title: {
         type: DataTypes.STRING,
@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
 
       modelName: 'Todos',
-    }
+    },
   );
   return Todos;
 };
