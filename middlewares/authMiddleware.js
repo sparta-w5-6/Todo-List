@@ -1,13 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { Users } = require('../models');
 const SECRET_KEY = process.env.SECRET_KEY;
+const { AuthorizationError } = require('../exception/index.exception');
 
 module.exports = (req, res, next) => {
   try {
     const { cookie } = req.headers;
     const [tokenType, tokenValue] = cookie.split('=');
+
     if (!tokenType || !tokenValue) {
-      throw err;
+      throw new AuthorizationError('로그인 후 이용가능한 기능입니다.');
     }
     // 전송된 토큰을 검증해 토큰에 담긴 userId를 userId 에 담고
     const { userId } = jwt.verify(req.cookies.token, SECRET_KEY);
@@ -19,6 +21,6 @@ module.exports = (req, res, next) => {
     });
     // 위 검증에 실패한 경우 쿠키가 담겨있지 않은 비회원이기 때문에 401 상태코드를 전송한다.
   } catch (err) {
-    res.status(401).send({ errorMessage: '로그인 후 이용 가능한 기능입니다.' });
+    throw new AuthorizationError('로그인 후 이용가능한 기능입니다.');
   }
 };

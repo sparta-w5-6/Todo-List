@@ -2,16 +2,15 @@ const express = require('express');
 const { Users, Todos, Likes } = require('../models');
 const TodoRepository = require('../repositories/todo.repository');
 const {
-  DoesntExistError,
   InvalidParamsError,
+  NotFoundError,
 } = require('../exception/index.exception');
 const LikeRepository = require('../repositories/like.repository');
 
 class TodoService {
-  constructor() {
-    TodoRepository = new TodoRepository();
-    LikeRepository = new LikeRepository();
-  }
+  TodoRepository = new TodoRepository();
+  LikeRepository = new LikeRepository();
+
   createTodo = async ({ title, item, isDone, userId }) => {
     //title, item 미입력시 에러 처리
     if (!title || !item) {
@@ -33,7 +32,7 @@ class TodoService {
     const todoExists = await this.TodoRepository.findTodoList(todoId);
 
     if (todoExists.todoId !== parseInt(todoId)) {
-      throw new DoesntExistError('todo게시글이 존재하지 않습니다');
+      throw new NotFoundError('todo게시글이 존재하지 않습니다');
     }
     //title, item 미입력시 에러 처리
     if (!title || !item) {

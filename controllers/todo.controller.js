@@ -3,9 +3,7 @@ const { Todos, Users, Likes } = require('../models');
 const TodoService = require('../services/todo.service');
 
 class TodoController {
-  constructor() {
-    TodoService = new TodoService();
-  }
+  TodoService = new TodoService();
   createTodo = async (req, res) => {
     try {
       const { title, item, isDone } = req.body;
