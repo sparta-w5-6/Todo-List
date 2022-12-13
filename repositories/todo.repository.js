@@ -18,15 +18,27 @@ class TodoRepository {
   };
   findTodoList = async (todoId, userId) => {
     const todo = await Todos.findOne({ where: { todoId, userId } });
-    // console.log('todo repo: ', todo);
+    console.log('todo repo: ', todo);
 
     return todo;
   };
-  updateTodo = async (todoId, title, item) => {
-    const update = await Todos.update({ title, item }, { where: { todoId } });
+  /* DB에 업데이트는 되는데 400 error가 뜬다. 
+  Error: WHERE parameter "userId" has invalid "undefined" value
+  * */
+  updateTodo = async (todoId, title, userId, item) => {
+    const update = await Todos.update(
+      { title, item },
+      {
+        where: { todoId, userId },
+      },
+    );
     // console.log('update: ', update);
 
     return update;
+  };
+  deleteTodoList = async (todoId, userId) => {
+    const remove = await Todos.destroy({ where: { todoId, userId } });
+    return remove;
   };
 
   doneTodo = async (todoId, userId) => {

@@ -39,9 +39,10 @@ class NotFoundError extends Error {
   constructor(message, status) {
     super(message);
     this.status = status || 404;
-    this.name = 'DoesntExistError';
+    this.name = 'NotFoundError';
   }
 }
+
 
 module.exports = {
   InvalidParamsError,
@@ -50,3 +51,4 @@ module.exports = {
   NotFoundError,
   BadRequestError,
 };
+

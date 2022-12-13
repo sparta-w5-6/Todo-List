@@ -4,6 +4,7 @@ const TodoService = require('../services/todo.service');
 
 class TodoController {
   TodoService = new TodoService();
+
   createTodo = async (req, res) => {
     try {
       const { title, item, isDone } = req.body;
@@ -27,6 +28,7 @@ class TodoController {
       const { todoId } = req.params;
       const { title, item } = req.body;
       const { userId } = res.locals.user;
+      console.log('controller userId: ', userId);
 
       // trouble shooting
       // 인자 순서 맞춥시다......
@@ -36,9 +38,9 @@ class TodoController {
         item,
         userId,
       );
-      console.log('update controller: ', update);
+      // console.log('update controller: ', update);
 
-      res.status(201).json({ result: update });
+      res.status(201).json({ result: 'todo 게시글 수정 완료' });
     } catch (error) {
       console.error(error);
       res.status(400).json({ errorMessage: error.message });
@@ -102,6 +104,21 @@ class TodoController {
       const { userId } = res.locals.user;
       const findTodoList = await this.TodoService.findTodoList(todoId, userId);
       return res.status(200).json({ result: findTodoList });
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
+    }
+  };
+
+  deleteTodoList = async (req, res) => {
+    try {
+      const { todoId } = req.params;
+      const { userId } = res.locals.user;
+      const deleteTodoList = await this.TodoService.deleteTodoList(
+        todoId,
+        userId,
+      );
+      return res.status(200).json({ result: 'todo 게시글 삭제 완료' });
     } catch (error) {
       console.error(error);
       res.status(400).json({ errorMessage: error.message });
