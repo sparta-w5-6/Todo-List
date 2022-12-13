@@ -69,6 +69,25 @@ class TodoController {
       }
     }
   };
+
+  likeTodo = async (req, res) => {
+    const { todoId } = req.params;
+    const { userId } = res.locals.user;
+
+    try {
+      const result = await this.TodoService.likeTodo(todoId, userId);
+
+      res.status(200).json({ result });
+    } catch (error) {
+      console.error(error);
+
+      if (error.message === 'NO_TODO') {
+        res.status(404).json({ errorMessage: 'todo가 존재하지 않아요.' });
+      } else {
+        res.status(500).json({ errorMessage: '알 수 없는 오류 발생' });
+      }
+    }
+  };
 }
 
 module.exports = TodoController;

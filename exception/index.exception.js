@@ -17,4 +17,13 @@ class ValidationError extends Error {
   }
 }
 
-module.exports = { InvalidParamsError, ValidationError };
+//없는 게시글
+class DoesntExistError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.status = status || 404;
+    this.name = 'DoesntExistError';
+  }
+}
+
+module.exports = { InvalidParamsError, ValidationError, DoesntExistError };

@@ -9,4 +9,5 @@ const todoController = new TodoController();
 router.post('/', authMiddleware, todoController.createTodo);
 router.put('/:todoId', authMiddleware, todoController.updateTodo);
 router.put('/:todoId/done', authMiddleware, todoController.doneTodo);
+router.put('/:todoId/like', authMiddleware, todoController.likeTodo);
 module.exports = router;

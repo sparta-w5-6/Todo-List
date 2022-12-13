@@ -12,10 +12,6 @@ class TodoRepository {
     });
     return todo;
   };
-  findOne = async (todoId, userId) => {
-    const find = await Todos.findOne({ where: { todoId, userId } });
-    return find;
-  };
 
   findTodoList = async (todoId) => {
     const todo = await Todos.findOne({ todoId });
@@ -41,6 +37,19 @@ class TodoRepository {
     await todo.save();
 
     return todo.isDone;
+  };
+
+  setLikeCount = async (todoId, userId, count) => {
+    const todo = await Todos.findOne({ where: { todoId, userId } });
+
+    if (!todo) {
+      throw new Error('NO_EXISTS_TODO');
+    }
+
+    todo.likeCount = count;
+    todo.updatedAT = new Date();
+
+    await todo.save();
   };
 }
 
