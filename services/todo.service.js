@@ -5,9 +5,12 @@ const {
   DoesntExistError,
   InvalidParamsError,
 } = require('../exception/index.exception');
+const LikeRepository = require('../repositories/like.repository');
+
 class TodoService {
   constructor() {
     this.TodoRepository = new TodoRepository();
+    this.LikeRepository = new LikeRepository();
   }
   createTodo = async ({ title, item, isDone, userId }) => {
     //title, item 미입력시 에러 처리
@@ -38,6 +41,17 @@ class TodoService {
       todoId,
     });
     return updateTodoList;
+  };
+  doneTodo = async (todoId, userId) => {
+    return this.TodoRepository.doneTodo(todoId, userId);
+  };
+  likeTodo = async (todoId, userId) => {
+    const like = await this.LikeRepository.toggleLike(todoId, userId);
+    const likeCount = await this.LikeRepository.getLikeCount(todoId);
+
+    await this.TodoRepository.setLikeCount(todoId, userId, likeCount);
+
+    return like.isLike;
   };
 }
 
