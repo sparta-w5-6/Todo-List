@@ -4,7 +4,7 @@ const TodoService = require('../services/todo.service');
 
 class TodoController {
   constructor() {
-    this.TodoService = new TodoService();
+    TodoService = new TodoService();
   }
   createTodo = async (req, res) => {
     try {
@@ -93,6 +93,17 @@ class TodoController {
     try {
       const findAllTodoList = await this.TodoService.findAllTodoList({});
       return res.status(200).json({ result: findAllTodoList });
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
+    }
+  };
+  findTodoList = async (req, res) => {
+    try {
+      const { todoId } = req.params;
+      const { userId } = res.locals.user;
+      const findTodoList = await this.TodoService.findTodoList(todoId, userId);
+      return res.status(200).json({ result: findTodoList });
     } catch (error) {
       console.error(error);
       res.status(400).json({ errorMessage: error.message });
