@@ -2,7 +2,7 @@ import * as Express from 'express';
 import { createServer } from 'http';
 import * as dotEnv from 'dotenv';
 import * as cookieParser from 'cookie-parser';
-import { SocketRepository } from './repositories/socket.repository';
+import { NotificationController } from './controllers/notification.controller';
 
 dotEnv.config();
 
@@ -36,7 +36,7 @@ app.use(errorHandler); // Error Handler
 
 const appServer = createServer(app);
 
-SocketRepository.init(appServer);
+NotificationController.init(appServer);
 
 appServer.listen(port, () => {
   console.log(port, 'server is opened');

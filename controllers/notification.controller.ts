@@ -6,7 +6,7 @@ interface OnTodoEventParams {
   todoId: number;
 }
 
-export class SocketRepository {
+export class NotificationController {
   private static socketServer?: SocketServer;
 
   public static init(appServer: HttpServer) {
