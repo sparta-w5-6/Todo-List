@@ -1,7 +1,8 @@
+const { Users } = require('../models');
 const SignupRepository = require('../repositories/signup.repository');
 const { ValidationError } = require('../exception/index.exception');
 class SignupService {
-  signupRepository = new SignupRepository();
+  signupRepository = new SignupRepository(Users);
 
   registerUser = async (email, nickname, password, confirm) => {
     const emailValidate = email.split('@'); // 이메일 형식 확인
