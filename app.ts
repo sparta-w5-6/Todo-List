@@ -36,7 +36,7 @@ app.use(errorHandler); // Error Handler
 
 const appServer = createServer(app);
 
-NotificationController.init(appServer);
+new NotificationController().init(appServer);
 
 appServer.listen(port, () => {
   console.log(port, 'server is opened');
