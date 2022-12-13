@@ -18,7 +18,7 @@ class TodoRepository {
   };
   findTodoList = async (todoId) => {
     const todo = await Todos.findOne({ where: { todoId } });
-    console.log('todo: ', todo);
+    console.log('todo repo: ', todo);
 
     return todo;
   };

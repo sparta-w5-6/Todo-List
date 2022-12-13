@@ -30,7 +30,7 @@ class TodoService {
     console.log('todoId:', todoId);
     //todo 게시글이 존재하지 않을 경우 에러 처리
     const todoExists = await this.TodoRepository.findTodoList(todoId);
-    // console.log('todoExists: ', todoExists);
+    console.log('todoExists: ', todoExists);
     console.log('typeof1:', typeof todoExists.todoId);
     console.log('typeof2:', typeof todoId);
     if (todoExists.todoId !== parseInt(todoId)) {
@@ -64,6 +64,15 @@ class TodoService {
       return b.createdAt - a.createdAt;
     });
     return findAllTodoList;
+  };
+  findTodoList = async ({ todoId }) => {
+    console.log('todoId service: ', todoId);
+
+    const findTodoList = await this.TodoRepository.findTodoList({
+      todoId,
+    });
+    console.log('findTodoList service: ', findTodoList);
+    return findTodoList;
   };
 }
 

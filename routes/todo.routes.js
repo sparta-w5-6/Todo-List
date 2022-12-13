@@ -11,5 +11,5 @@ router.put('/:todoId', authMiddleware, todoController.updateTodo);
 router.put('/:todoId/done', authMiddleware, todoController.doneTodo);
 router.put('/:todoId/like', authMiddleware, todoController.likeTodo);
 router.get('/', todoController.findAllTodoList);
-
+router.get('/:todoId', authMiddleware, todoController.findTodoList);
 module.exports = router;
