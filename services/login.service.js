@@ -1,3 +1,5 @@
+const { Users } = require('../models');
+
 const LoginRepository = require('../repositories/login.repository');
 require('dotenv').config();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -5,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const { ValidationError } = require('../exception/index.exception');
 
 class LoginService {
-  loginRepository = new LoginRepository();
+  loginRepository = new LoginRepository(Users);
 
   findUser = async (email) => {
     const user = await this.loginRepository.findUser(email);
@@ -21,6 +23,8 @@ class LoginService {
     if (user.password !== password) {
       throw new ValidationError('비밀번호가 일치하지 않습니다.');
     }
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 10);
     const token = jwt.sign(
       { userId: user.userId, email: user.email, nickname: user.nickname },
       SECRET_KEY,

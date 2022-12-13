@@ -8,12 +8,29 @@ class InvalidParamsError extends Error {
   }
 }
 
-// 유효성 에러 , 이메일, pw 등 유효하지 않은 에러 발생시
+//
 class ValidationError extends Error {
   constructor(message, status) {
     super(message);
     this.status = status || 412;
     this.name = 'ValidationError';
+  }
+}
+// 400
+class BadRequestError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.status = status || 400;
+    this.name = 'BadRequestError';
+  }
+}
+
+// 인증에러 401
+class AuthorizationError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.status = status || 401;
+    this.name = 'AutorizationError';
   }
 }
 
@@ -26,4 +43,12 @@ class NotFoundError extends Error {
   }
 }
 
-module.exports = { InvalidParamsError, ValidationError, NotFoundError };
+
+module.exports = {
+  InvalidParamsError,
+  AuthorizationError,
+  ValidationError,
+  NotFoundError,
+  BadRequestError,
+};
+

@@ -2,8 +2,9 @@ const express = require('express');
 const { Users, Todos, Likes } = require('../models');
 const TodoRepository = require('../repositories/todo.repository');
 const {
-  NotFoundError,
+
   InvalidParamsError,
+  NotFoundError,
 } = require('../exception/index.exception');
 const LikeRepository = require('../repositories/like.repository');
 
@@ -31,7 +32,9 @@ class TodoService {
     //todo 게시글이 존재하지 않을 경우 에러 처리
     const todoExists = await this.TodoRepository.findTodoList(todoId, userId);
 
+
     if (!todoExists) {
+
       throw new NotFoundError('todo게시글이 존재하지 않습니다');
     }
     //title, item 미입력시 에러 처리
