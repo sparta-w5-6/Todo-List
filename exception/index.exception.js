@@ -18,12 +18,12 @@ class ValidationError extends Error {
 }
 
 //없는 게시글
-class DoesntExistError extends Error {
+class NotFoundError extends Error {
   constructor(message, status) {
     super(message);
     this.status = status || 404;
-    this.name = 'DoesntExistError';
+    this.name = 'NotFoundError';
   }
 }
 
-module.exports = { InvalidParamsError, ValidationError, DoesntExistError };
+module.exports = { InvalidParamsError, ValidationError, NotFoundError };
