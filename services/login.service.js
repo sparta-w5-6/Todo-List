@@ -1,3 +1,5 @@
+const { Users } = require('../models');
+
 const LoginRepository = require('../repositories/login.repository');
 require('dotenv').config();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -5,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const { ValidationError } = require('../exception/index.exception');
 
 class LoginService {
-  loginRepository = new LoginRepository();
+  loginRepository = new LoginRepository(Users);
 
   findUser = async (email) => {
     const user = await this.loginRepository.findUser(email);

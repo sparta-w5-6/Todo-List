@@ -12,7 +12,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
+    "test:silent": "jest --silent --forceExit",
+    "test:coverage": "jest --coverage --forceExit",
+    "test:unit": "jest __tests__/unit/repositories --forceExit",
+    "test:integration": "jest __tests__/integration --forceExit",
     "start": "nodemon app"
   },
   "repository": {

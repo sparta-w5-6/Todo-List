@@ -88,6 +88,16 @@ class TodoController {
       }
     }
   };
+
+  findAllTodoList = async (req, res) => {
+    try {
+      const findAllTodoList = await this.TodoService.findAllTodoList({});
+      return res.status(200).json({ result: findAllTodoList });
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ errorMessage: error.message });
+    }
+  };
 }
 
 module.exports = TodoController;
