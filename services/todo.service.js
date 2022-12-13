@@ -9,14 +9,15 @@ const LikeRepository = require('../repositories/like.repository');
 
 class TodoService {
   constructor() {
-    this.TodoRepository = new TodoRepository();
-    this.LikeRepository = new LikeRepository();
+    TodoRepository = new TodoRepository();
+    LikeRepository = new LikeRepository();
   }
   createTodo = async ({ title, item, isDone, userId }) => {
     //title, item 미입력시 에러 처리
     if (!title || !item) {
       throw new InvalidParamsError('입력 값이 올바르지 않습니다');
     }
+
     const todo = await this.TodoRepository.createTodo({
       title,
       item,

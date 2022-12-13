@@ -4,7 +4,7 @@ const TodoService = require('../services/todo.service');
 
 class TodoController {
   constructor() {
-    this.TodoService = new TodoService();
+    TodoService = new TodoService();
   }
   createTodo = async (req, res) => {
     try {
