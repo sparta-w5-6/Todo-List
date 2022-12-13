@@ -7,9 +7,7 @@ module.exports = (req, res, next) => {
     const { cookie } = req.headers;
     const [tokenType, tokenValue] = cookie.split('=');
     if (!tokenType || !tokenValue) {
-      return res
-        .status(400)
-        .json({ errorMessage: '로그인이 후 이용 가능한 기능입니다.' });
+      throw err;
     }
     // 전송된 토큰을 검증해 토큰에 담긴 userId를 userId 에 담고
     const { userId } = jwt.verify(req.cookies.token, SECRET_KEY);
