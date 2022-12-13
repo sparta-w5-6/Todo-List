@@ -9,25 +9,36 @@ describe('Signup Repository Layer test', () => {
     jest.resetAllMocks();
   });
 
-  test('create Method toHaveBeenCalled', async () => {
+  // signup 에 create 메소드 테스트
+  test('create Method test', async () => {
     mockSignupModel.create = jest.fn(() => {
-      return 'test Signup User';
+      return 'test Signup create User';
     });
-    const signupUserParams = {
+    const signupUserCreateParams = {
       email: 'test@register.com',
       nickname: 'testRegister',
       password: 'testPW123',
     };
     const signupUserData = await singupRepository.registerUser(
-      signupUserParams.email,
-      signupUserParams.nickname,
-      signupUserParams.password,
+      signupUserCreateParams.email,
+      signupUserCreateParams.nickname,
+      signupUserCreateParams.password,
     );
 
     // create Method 가 1번 실행 됐는지
     expect(mockSignupModel.create).toHaveBeenCalledTimes(1);
 
     // create Method의 결과가 registerUser의 결과와 일치하는지
-    expect(signupUserData).toEqual('test Signup User');
+    expect(signupUserData).toEqual('test Signup create User');
+  });
+
+  // signup 에 findAll 메소드 테스트
+  test('findAll Method test', async () => {
+    mockSignupModel.findAll = jest.fn(() => {
+      return 'test Signup findAll result';
+    });
+    const signupFindAll = await singupRepository.findAllUser();
+    expect(mockSignupModel.findAll).toHaveBeenCalledTimes(1);
+    expect(signupFindAll).toEqual('test Signup findAll result');
   });
 });
