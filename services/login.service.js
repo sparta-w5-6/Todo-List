@@ -16,6 +16,7 @@ class LoginService {
     }
     return user;
   };
+
   login = async (user, password) => {
     if (!password) {
       throw new ValidationError('비밀번호를 입력해 주세요');
