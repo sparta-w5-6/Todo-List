@@ -7,6 +7,7 @@ const commentController = new CommentController();
 
 router.post('/:todoId', authMiddleware, commentController.createComment);
 router.get('/', commentController.findAllComment);
-router.put('/:commentId', commentController.updateComment);
+router.put('/:commentId',authMiddleware, commentController.updateComment);
+router.delete('/:commentId',authMiddleware, commentController.deleteComment);
 
 module.exports = router;
