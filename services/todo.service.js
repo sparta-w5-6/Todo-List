@@ -27,12 +27,10 @@ class TodoService {
   };
 
   updateTodo = async (todoId, title, item) => {
-    console.log('todoId:', todoId);
+    // console.log('todoId:', todoId);
     //todo 게시글이 존재하지 않을 경우 에러 처리
     const todoExists = await this.TodoRepository.findTodoList(todoId);
-    console.log('todoExists: ', todoExists);
-    console.log('typeof1:', typeof todoExists.todoId);
-    console.log('typeof2:', typeof todoId);
+
     if (todoExists.todoId !== parseInt(todoId)) {
       throw new DoesntExistError('todo게시글이 존재하지 않습니다');
     }
@@ -41,9 +39,7 @@ class TodoService {
       throw new InvalidParamsError('입력 값이 올바르지 않습니다');
     }
     await this.TodoRepository.updateTodo(todoId, title, item);
-    const updateTodoList = await this.TodoRepository.findTodoList({
-      todoId,
-    });
+    const updateTodoList = await this.TodoRepository.findTodoList(todoId);
     return updateTodoList;
   };
   doneTodo = async (todoId, userId) => {
@@ -65,13 +61,11 @@ class TodoService {
     });
     return findAllTodoList;
   };
-  findTodoList = async ({ todoId }) => {
-    console.log('todoId service: ', todoId);
+  findTodoList = async (todoId, userId) => {
+    // console.log('todoId service: ', todoId);
 
-    const findTodoList = await this.TodoRepository.findTodoList({
-      todoId,
-    });
-    console.log('findTodoList service: ', findTodoList);
+    const findTodoList = await this.TodoRepository.findTodoList(todoId, userId);
+    // console.log('findTodoList service: ', findTodoList);
     return findTodoList;
   };
 }

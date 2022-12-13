@@ -16,15 +16,15 @@ class TodoRepository {
     const findAllTodoList = await Todos.findAll({});
     return findAllTodoList;
   };
-  findTodoList = async (todoId) => {
-    const todo = await Todos.findOne({ where: { todoId } });
-    console.log('todo repo: ', todo);
+  findTodoList = async (todoId, userId) => {
+    const todo = await Todos.findOne({ where: { todoId, userId } });
+    // console.log('todo repo: ', todo);
 
     return todo;
   };
   updateTodo = async (todoId, title, item) => {
     const update = await Todos.update({ title, item }, { where: { todoId } });
-    console.log('update: ', update);
+    // console.log('update: ', update);
 
     return update;
   };

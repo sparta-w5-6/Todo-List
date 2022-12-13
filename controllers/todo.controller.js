@@ -102,10 +102,7 @@ class TodoController {
     try {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
-      const findTodoList = await this.TodoService.findTodoList({
-        todoId,
-        userId,
-      });
+      const findTodoList = await this.TodoService.findTodoList(todoId, userId);
       return res.status(200).json({ result: findTodoList });
     } catch (error) {
       console.error(error);
