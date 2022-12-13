@@ -27,6 +27,13 @@ class CommentRepository {
     );
     return updateComment;
   };
+
+  deleteComment = async (commentId) => {
+    const deleteComment = await Comments.destroy({
+      where: { commentId },
+    });
+    return deleteComment;
+  };
 }
 
 module.exports = CommentRepository;
