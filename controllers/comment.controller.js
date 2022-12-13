@@ -33,7 +33,7 @@ class CommentController {
 
   findAllComment = async (req, res, next) => {
     try {
-      const findAllComment = await this.commentService.findAllComment({});
+      const findAllComment = await this.commentService.findAllComment();
       return res.status(200).json({ result: findAllComment });
     } catch (error) {
       console.error(error);
