@@ -27,6 +27,21 @@ class TodoRepository {
 
     return update;
   };
+
+  doneTodo = async (todoId, userId) => {
+    const todo = await Todos.findOne({ where: { todoId, userId } });
+
+    if (!todo) {
+      throw new Error('NO_EXISTS_TODO');
+    }
+
+    todo.isDone = !todo.isDone;
+    todo.updatedAt = new Date();
+
+    await todo.save();
+
+    return todo.isDone;
+  };
 }
 
 module.exports = TodoRepository;

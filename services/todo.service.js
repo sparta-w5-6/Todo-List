@@ -41,6 +41,9 @@ class TodoService {
     console.log('여기에요', updateTodoList);
     return updateTodoList;
   };
+  doneTodo = async (todoId, userId) => {
+    return this.TodoRepository.doneTodo(todoId, userId);
+  };
 }
 
 module.exports = TodoService;

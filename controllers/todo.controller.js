@@ -46,6 +46,29 @@ class TodoController {
       res.status(400).json({ errorMessage: error.message });
     }
   };
+
+  doneTodo = async (req, res) => {
+    try {
+      const { todoId } = req.params;
+      const { userId } = res.locals.user;
+
+      const result = await this.TodoService.doneTodo(todoId, userId);
+
+      if (result) {
+        res.status(200).json({ result, message: '완료를 축하합니다' });
+      } else {
+        res.status(200).json({ result, message: '취소 완료' });
+      }
+    } catch (error) {
+      console.error(error);
+
+      if (error.message === 'NO_EXISTS_TODO') {
+        res.status(404).json({ errorMessage: 'todo item이 존재하지 않습니다' });
+      } else {
+        res.status(500).json({ errorMessage: '알 수 없는 오류 발생' });
+      }
+    }
+  };
 }
 
 module.exports = TodoController;
