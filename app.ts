@@ -1,5 +1,9 @@
-const express = require('express');
-const app = express();
+import * as Express from 'express';
+import * as dotEnv from 'dotenv';
+import * as cookieParser from 'cookie-parser';
+
+dotEnv.config();
+
 const router = require('./routes');
 const { sequelize } = require('./models');
 const {
@@ -7,7 +11,8 @@ const {
   errorLogger,
 } = require('./middlewares/error-handler.middleware');
 
-require('dotenv').config();
+export const app = Express();
+
 const port = process.env.PORT || 3000;
 
 sequelize
@@ -15,14 +20,12 @@ sequelize
   .then(() => {
     console.log('데이터베이스 연결 성공');
   })
-  .catch((err) => {
+  .catch((err: unknown) => {
     console.error(err);
   });
 
-const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-
-app.use(express.json());
+app.use(Express.json());
 
 app.use('/api', router);
 
@@ -32,5 +35,3 @@ app.use(errorHandler); // Error Handler
 app.listen(port, () => {
   console.log(port, ' server is opened');
 });
-
-module.exports = app;
