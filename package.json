@@ -17,7 +17,7 @@
     "test": "jest --forceExit",
     "test:silent": "jest --silent --forceExit",
     "test:coverage": "jest --coverage --forceExit",
-    "test:unit": "jest __tests__/unit/services --forceExit",
+    "test:unit": "jest __tests__/unit/ --forceExit",
     "test:integration": "jest __tests__/integration --forceExit",
     "build": "del dist && tsc",
     "start": "nodemon dist/app.js"

@@ -1,11 +1,11 @@
-const express = require('express');
-const { Todos, Users, Likes } = require('../models');
-const TodoService = require('../services/todo.service');
+import { Request, Response } from 'express';
 
-class TodoController {
-  TodoService = new TodoService();
+import { TodoService } from '../services/todo.service';
 
-  createTodo = async (req, res) => {
+export class TodoController {
+  private readonly TodoService = new TodoService();
+
+  public async createTodo(req: Request, res: Response): Promise<void> {
     try {
       const { title, item, isDone } = req.body;
       const { userId } = res.locals.user;
@@ -19,40 +19,41 @@ class TodoController {
       res.status(201).json({ result: todo });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ errorMessage: error.message });
+      res.status(400).json({ errorMessage: (<Error>error).message });
     }
-  };
+  }
 
-  updateTodo = async (req, res) => {
+  public async updateTodo(req: Request, res: Response): Promise<void> {
     try {
       const { todoId } = req.params;
       const { title, item } = req.body;
       const { userId } = res.locals.user;
       console.log('controller userId: ', userId);
 
-      // trouble shooting
-      // 인자 순서 맞춥시다......
       const update = await this.TodoService.updateTodo(
-        todoId,
+        Number(todoId),
         title,
         item,
-        userId,
+        Number(userId),
       );
       // console.log('update controller: ', update);
 
       res.status(201).json({ result: 'todo 게시글 수정 완료' });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ errorMessage: error.message });
+      res.status(400).json({ errorMessage: (<Error>error).message });
     }
-  };
+  }
 
-  doneTodo = async (req, res) => {
+  public async doneTodo(req: Request, res: Response): Promise<void> {
     try {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
 
-      const result = await this.TodoService.doneTodo(todoId, userId);
+      const result = await this.TodoService.doneTodo(
+        Number(todoId),
+        Number(userId),
+      );
 
       if (result) {
         res.status(200).json({ result, message: '완료를 축하합니다' });
@@ -62,68 +63,73 @@ class TodoController {
     } catch (error) {
       console.error(error);
 
-      if (error.message === 'NO_EXISTS_TODO') {
+      if ((<Error>error).message === 'NO_EXISTS_TODO') {
         res.status(404).json({ errorMessage: 'todo item이 존재하지 않습니다' });
       } else {
         res.status(500).json({ errorMessage: '알 수 없는 오류 발생' });
       }
     }
-  };
+  }
 
-  likeTodo = async (req, res) => {
+  public async likeTodo(req: Request, res: Response): Promise<void> {
     const { todoId } = req.params;
     const { userId } = res.locals.user;
 
     try {
-      const result = await this.TodoService.likeTodo(todoId, userId);
+      const result = await this.TodoService.likeTodo(
+        Number(todoId),
+        Number(userId),
+      );
 
       res.status(200).json({ result });
     } catch (error) {
       console.error(error);
 
-      if (error.message === 'NO_TODO') {
+      if ((<Error>error).message === 'NO_TODO') {
         res.status(404).json({ errorMessage: 'todo가 존재하지 않아요.' });
       } else {
         res.status(500).json({ errorMessage: '알 수 없는 오류 발생' });
       }
     }
-  };
+  }
 
-  findAllTodoList = async (req, res) => {
+  public async findAllTodoList(req: Request, res: Response): Promise<void> {
     try {
-      const findAllTodoList = await this.TodoService.findAllTodoList({});
-      return res.status(200).json({ result: findAllTodoList });
+      const findAllTodoList = await this.TodoService.findAllTodoList();
+      res.status(200).json({ result: findAllTodoList });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ errorMessage: error.message });
+      res.status(400).json({ errorMessage: (<Error>error).message });
     }
-  };
-  findTodoList = async (req, res) => {
+  }
+
+  public async findTodoList(req: Request, res: Response): Promise<void> {
     try {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
-      const findTodoList = await this.TodoService.findTodoList(todoId, userId);
-      return res.status(200).json({ result: findTodoList });
+      const findTodoList = await this.TodoService.findTodoList(
+        Number(todoId),
+        Number(userId),
+      );
+      res.status(200).json({ result: findTodoList });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ errorMessage: error.message });
+      res.status(400).json({ errorMessage: (<Error>error).message });
     }
-  };
+  }
 
-  deleteTodoList = async (req, res) => {
+  public async deleteTodoList(req: Request, res: Response): Promise<void> {
     try {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
       const deleteTodoList = await this.TodoService.deleteTodoList(
-        todoId,
-        userId,
+        Number(todoId),
+        Number(userId),
       );
-      return res.status(200).json({ result: 'todo 게시글 삭제 완료' });
+      res.status(200).json({ result: 'todo 게시글 삭제 완료' });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ errorMessage: error.message });
+      res.status(400).json({ errorMessage: (<Error>error).message });
     }
-  };
+  }
 }
-
-module.exports = TodoController;

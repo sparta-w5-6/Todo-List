@@ -26,8 +26,8 @@ class LoginService {
     if (user.password !== password) {
       throw new ValidationError('비밀번호가 일치하지 않습니다.');
     }
-    // const expires = new Date();
-    // expires.setHours(expires.getHours() + 10);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 10);
     const token = jwt.sign(
       { userId: user.userId, email: user.email, nickname: user.nickname },
       SECRET_KEY,

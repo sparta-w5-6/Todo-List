@@ -30,6 +30,12 @@ describe('Signup Repository Layer test', () => {
 
     // create Method의 결과가 registerUser의 결과와 일치하는지
     expect(signupUserData).toEqual('test Signup create User');
+
+    expect(mockSignupModel.create).toHaveBeenCalledWith({
+      email: signupUserCreateParams.email,
+      nickname: signupUserCreateParams.nickname,
+      password: signupUserCreateParams.password,
+    });
   });
 
   // signup 에 findAll 메소드 테스트
