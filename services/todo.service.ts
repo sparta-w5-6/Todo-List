@@ -37,9 +37,7 @@ export class TodoService {
     //todo 게시글이 존재하지 않을 경우 에러 처리
     const todoExists = await this.TodoRepository.findTodoList(todoId, userId);
 
-
     if (!todoExists) {
-
       throw new NotFoundError('todo게시글이 존재하지 않습니다');
     }
     //title, item 미입력시 에러 처리
@@ -59,7 +57,9 @@ export class TodoService {
   }
 
   public async likeTodo(todoId: number, userId: number): Promise<unknown> {
-    const like = <Model & { isLike: boolean }>(await this.LikeRepository.toggleLike(todoId, userId));
+    const like = <Model & { isLike: boolean }>(
+      await this.LikeRepository.toggleLike(todoId, userId)
+    );
     const likeCount = await this.LikeRepository.getLikeCount(todoId);
 
     await this.TodoRepository.setLikeCount(todoId, userId, likeCount);
@@ -81,7 +81,10 @@ export class TodoService {
     return findTodoList;
   }
 
-  public async deleteTodoList(todoId: number, userId: number): Promise<unknown> {
+  public async deleteTodoList(
+    todoId: number,
+    userId: number,
+  ): Promise<unknown> {
     //todo 게시글이 존재하지 않을 경우 에러 처리
     const todoExists = await this.TodoRepository.findTodoList(todoId, userId);
 

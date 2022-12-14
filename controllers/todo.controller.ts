@@ -50,7 +50,10 @@ export class TodoController {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
 
-      const result = await this.TodoService.doneTodo(Number(todoId), Number(userId));
+      const result = await this.TodoService.doneTodo(
+        Number(todoId),
+        Number(userId),
+      );
 
       if (result) {
         res.status(200).json({ result, message: '완료를 축하합니다' });
@@ -73,7 +76,10 @@ export class TodoController {
     const { userId } = res.locals.user;
 
     try {
-      const result = await this.TodoService.likeTodo(Number(todoId), Number(userId));
+      const result = await this.TodoService.likeTodo(
+        Number(todoId),
+        Number(userId),
+      );
 
       res.status(200).json({ result });
     } catch (error) {
@@ -101,7 +107,10 @@ export class TodoController {
     try {
       const { todoId } = req.params;
       const { userId } = res.locals.user;
-      const findTodoList = await this.TodoService.findTodoList(Number(todoId), Number(userId));
+      const findTodoList = await this.TodoService.findTodoList(
+        Number(todoId),
+        Number(userId),
+      );
       res.status(200).json({ result: findTodoList });
     } catch (error) {
       console.error(error);

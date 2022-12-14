@@ -43,16 +43,17 @@ export class TodoRepository {
   ): Promise<unknown> {
     const update = await Todos.update(
       { title, item },
-      {
-        where: { todoId, userId },
-      },
+      { where: { todoId, userId } },
     );
     // console.log('update: ', update);
 
     return update;
   }
 
-  public async deleteTodoList(todoId: number, userId: number): Promise<unknown> {
+  public async deleteTodoList(
+    todoId: number,
+    userId: number,
+  ): Promise<unknown> {
     const remove = await Todos.destroy({ where: { todoId, userId } });
     return remove;
   }
@@ -72,7 +73,11 @@ export class TodoRepository {
     return todo.isDone;
   }
 
-  public async setLikeCount(todoId: number, userId: number, count: number): Promise<void> {
+  public async setLikeCount(
+    todoId: number,
+    userId: number,
+    count: number,
+  ): Promise<void> {
     const todo = await Todos.findOne({ where: { todoId, userId } });
 
     if (!todo) {
