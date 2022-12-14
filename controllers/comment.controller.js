@@ -2,9 +2,8 @@ const { json } = require('sequelize');
 const CommentService = require('../services/comment.service');
 
 class CommentController {
-  constructor() {
-    this.commentService = new CommentService();
-  }
+    commentService = new CommentService();
+  
 
   createComment = async (req, res, next) => {
     const { comment } = req.body;
