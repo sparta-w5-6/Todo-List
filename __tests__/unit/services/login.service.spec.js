@@ -5,9 +5,8 @@ require('dotenv').config();
 let mockLoginRepository = {
   findUser: jest.fn(),
   login: jest.fn(),
-  sign: jest.fn(),
+  //   sign: jest.fn(),
 };
-jest.mock('jsonwebtoken');
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -51,13 +50,23 @@ describe('Login service test', () => {
   // 2. 일치하다면 정상적으로 토큰이 생성되는지
 
   test('login Service sign Method', async () => {
-    const token = jwt.sign(
-      { userId: 1, email: 'test@example.com' },
-      SECRET_KEY,
-      { expireIn: '1m', issuer: 'najiwon' },
-    );
-    const req = { headers: { authorization: token } };
-    verifyToken(req, res, next);
-    expect(next).toHaveBeenCalledTimes(1);
+    const user = await loginService.findUser({
+      userId: 1,
+      email: 'test@test.com',
+      password: '1234',
+      createdAt: new Date('14 December 2022 00:00'),
+      updatedAt: new Date('14 December 2022 01:00'),
+    });
+
+    const token = jwt.sign({
+      userId: user.userId,
+      email: user.email,
+      nickname: user.nickname,
+    });
+    const loggedin = await loginService.login({
+      user: 'test@test.com',
+      password: 'test1234',
+    });
+    expect(loggedin).toBe(token);
   });
 });
