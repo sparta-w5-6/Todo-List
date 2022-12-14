@@ -10,7 +10,6 @@ let mockCommentService = {
 
 let mockRequest = {
   body: jest.fn(),
-  params: jest.fn(),
 };
 
 let mockResponse = {
