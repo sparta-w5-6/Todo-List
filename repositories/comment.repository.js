@@ -1,8 +1,6 @@
-const { Comments } = require('../models');
-
 class CommentRepository {
-  constructor() {
-    this.commentsModel = Comments;
+  constructor(CommentsModel) {
+    this.commentsModel = CommentsModel;
   }
 
   createComment = async (comment, userId, todoId) => {
