@@ -31,7 +31,7 @@ class CommentRepository {
       { comment },
       { where: { commentId } },
     );
-    console.log('updateComment',updateComment)
+    console.log('updateComment', updateComment);
     return updateComment;
   };
 
