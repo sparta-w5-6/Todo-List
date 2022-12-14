@@ -2,7 +2,7 @@ const SignupRepository = require('../../../repositories/signup.repository');
 
 const mockSignupModel = { create: jest.fn(), findAll: jest.fn() };
 
-let singupRepository = new SignupRepository(mockSignupModel);
+let signupRepository = new SignupRepository(mockSignupModel);
 
 describe('Signup Repository Layer test', () => {
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('Signup Repository Layer test', () => {
       nickname: 'testRegister',
       password: 'testPW123',
     };
-    const signupUserData = await singupRepository.registerUser(
+    const signupUserData = await signupRepository.registerUser(
       signupUserCreateParams.email,
       signupUserCreateParams.nickname,
       signupUserCreateParams.password,
@@ -37,7 +37,7 @@ describe('Signup Repository Layer test', () => {
     mockSignupModel.findAll = jest.fn(() => {
       return 'test Signup findAll result';
     });
-    const signupFindAll = await singupRepository.findAllUser();
+    const signupFindAll = await signupRepository.findAllUser();
     expect(mockSignupModel.findAll).toHaveBeenCalledTimes(1);
     expect(signupFindAll).toEqual('test Signup findAll result');
   });

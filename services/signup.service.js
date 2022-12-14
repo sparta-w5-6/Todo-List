@@ -1,6 +1,7 @@
 const { Users } = require('../models');
 const SignupRepository = require('../repositories/signup.repository');
 const { ValidationError } = require('../exception/index.exception');
+
 class SignupService {
   signupRepository = new SignupRepository(Users);
 

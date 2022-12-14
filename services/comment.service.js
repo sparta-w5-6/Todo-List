@@ -1,9 +1,10 @@
 const CommentRepository = require('../repositories/comment.repository');
 const TodoRepository = require('../repositories/todo.repository');
+const { Comments } = require('../models');
 
 class CommentService {
-  commentRepository = new CommentRepository();
-  todoRepository = new TodoRepository();
+  commentRepository = new CommentRepository(Comments);
+  todoRepository = new TodoRepository(Comments);
 
   createComment = async (comment, userId, todoId) => {
     if (!comment) {
@@ -32,8 +33,8 @@ class CommentService {
     };
   };
 
-  findAllComment = async ({}) => {
-    const findAllComment = await this.commentRepository.findAllComment({});
+  findAllComment = async () => {
+    const findAllComment = await this.commentRepository.findAllComment();
     findAllComment.sort((a, b) => {
       return b.createdAt - a.createdAt;
     });
