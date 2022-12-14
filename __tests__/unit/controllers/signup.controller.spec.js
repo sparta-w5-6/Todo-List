@@ -12,12 +12,12 @@ signupController.signupService = mockSignupService;
 
 describe('SignupController', () => {
   beforeEach(() => {
+    // 메소드 체이닝으로 인해 반환값이 자신으로 설정되어야 함
     jest.resetAllMocks();
     mockResponse.status = jest.fn(() => {
       return mockResponse;
     });
   });
-  // 메소드 체이닝으로 인해 반환값이 자신으로 설정되어야 함
   test('signup Controller registerUser Method by success', async () => {
     const signupRequestBodyParams = {
       email: 'test@test.com',
