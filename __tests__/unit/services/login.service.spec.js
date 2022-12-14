@@ -5,7 +5,6 @@ require('dotenv').config();
 let mockLoginRepository = {
   findUser: jest.fn(),
   login: jest.fn(),
-  //   sign: jest.fn(),
 };
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -22,22 +21,13 @@ describe('Login service test', () => {
 
   test('Login Service findUser Method', async () => {
     // 가짜 mock 데이터 생성
-    const findUserReturnValue = [
-      {
-        userId: 1,
-        email: 'test@test.com',
-        password: '1234',
-        createdAt: new Date('14 December 2022 00:00'),
-        updatedAt: new Date('14 December 2022 01:00'),
-      },
-      {
-        userId: 2,
-        email: 'test2@test.com',
-        password: '1234',
-        createdAt: new Date('14 December 2022 01:00'),
-        updatedAt: new Date('14 December 2022 02:00'),
-      },
-    ];
+    const findUserReturnValue = {
+      userId: 1,
+      email: 'test@test.com',
+      password: '1234',
+      createdAt: new Date('14 December 2022 00:00'),
+      updatedAt: new Date('14 December 2022 01:00'),
+    };
     mockLoginRepository.findUser = jest.fn(() => findUserReturnValue);
     const user = await loginService.findUser();
 
@@ -50,23 +40,23 @@ describe('Login service test', () => {
   // 2. 일치하다면 정상적으로 토큰이 생성되는지
 
   test('login Service sign Method', async () => {
-    const user = await loginService.findUser({
+    const userInfo = {
       userId: 1,
       email: 'test@test.com',
       password: '1234',
-      createdAt: new Date('14 December 2022 00:00'),
-      updatedAt: new Date('14 December 2022 01:00'),
-    });
+      nickname: 'testNick',
+    };
 
-    const token = jwt.sign({
-      userId: user.userId,
-      email: user.email,
-      nickname: user.nickname,
-    });
-    const loggedin = await loginService.login({
-      user: 'test@test.com',
-      password: 'test1234',
-    });
-    expect(loggedin).toBe(token);
+    const loginBodyParams = await loginService.login(userInfo, '1234');
+    const token = jwt.sign(
+      {
+        userId: 1,
+        email: userInfo.email,
+        nickname: userInfo.nickname,
+      },
+      SECRET_KEY,
+    );
+
+    expect(token).toEqual(loginBodyParams);
   });
 });
