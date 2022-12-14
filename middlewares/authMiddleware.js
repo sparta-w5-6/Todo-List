@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
     });
     // 위 검증에 실패한 경우 쿠키가 담겨있지 않은 비회원이기 때문에 401 상태코드를 전송한다.
   } catch (err) {
+    console.log(err);
     throw new AuthorizationError('로그인 후 이용가능한 기능입니다.');
   }
 };

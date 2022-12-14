@@ -31,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         onDelete: 'CASCADE',
         allowNull: false,
-        // unique: true,
       },
       title: {
         type: DataTypes.STRING,
