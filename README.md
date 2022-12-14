@@ -6,11 +6,43 @@
 - 좋아요
 
 # 사용 스택
-- node.js
-- express.js
-- sequelize
+- Node.js
+- TypeScript
+- Express.js
+- Sequelize.js
 - MySQL
-- jest
+- Jest
+
+# Getting Started
+
+```bash
+git clone https://github.com/sparta-w5-6/Todo-List.git
+cd Todo-List
+npm ci
+```
+
+## 프로젝트 빌드(TypeScript Transpile)
+
+```bash
+npm run build
+```
+
+> - `dist/` 디렉토리에 프로젝트를 `.js` 파일로 생성
+> - ℹ️ `dist/`는 Git에 트래킹 되지 않음
+
+## 애플리케이션 실행
+
+```bash
+npm run start
+```
+
+> - `dist/app.js` 파일을 `nodemon`으로 실행  
+> - ⚠️ 프로젝트가 빌드(`npm run build`) 되지 않은 상태라면 실행되지 않습니다!
+
+## TO-DO
+
+- [ ] 프로젝트의 애플리케이션 부분 JavaScript 코드를 TypeScript(`.ts`)로 마이그레이션
+  - [ ] `tsconfig.json` 파일의 `compilerOptions.allowJs`를 `false`로 변경
 
 # 개발 규칙
 - .gitignore 파일 생성 - gitignore.io 이용해서 커밋 하기
