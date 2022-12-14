@@ -1,10 +1,11 @@
 const CommentRepository = require('../repositories/comment.repository');
 const TodoRepository = require('../repositories/todo.repository');
-const { Comments } = require('../models');
 
 class CommentService {
-  commentRepository = new CommentRepository(Comments);
-  todoRepository = new TodoRepository(Comments);
+  constructor() {
+    this.commentRepository = new CommentRepository();
+    this.todoRepository = new TodoRepository();
+  }
 
   createComment = async (comment, userId, todoId) => {
     if (!comment) {
