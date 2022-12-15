@@ -1,5 +1,6 @@
 const SignupService = require('../../../services/signup.service');
-
+const ValidationError = require('.../../../exception/index.exception');
+const valiError = new ValidationError.ValidationError();
 let mockSignupRepository = {
   findAllUser: jest.fn(),
   registerUser: jest.fn(),
@@ -71,4 +72,9 @@ describe('Signup Service', () => {
       registerUserReturnValue.nickname,
     );
   });
+
+  // test('이메일 형식이 올바르지 않으면 validationError', () => {});
+  // test('이미 가입된 이메일이면 validationError', () => {});
+  // test('비밀번호가 4글자 미만이면 validationError', () => {});
+  // test('패스워드와 패스워드 확인이 일치하지 않으면 validationError', () => {});
 });
