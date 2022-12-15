@@ -1,6 +1,8 @@
 import * as Express from 'express';
+import { createServer } from 'http';
 import * as dotEnv from 'dotenv';
 import * as cookieParser from 'cookie-parser';
+import { NotificationController } from './controllers/notification.controller';
 
 dotEnv.config();
 
@@ -13,7 +15,7 @@ const {
 
 export const app = Express();
 
-const port = process.env.PORT || 3000;
+const port = Number(process.env.PORT) || 3000;
 
 sequelize
   .sync({ force: false })
@@ -32,6 +34,10 @@ app.use('/api', router);
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler
 
-app.listen(port, () => {
-  console.log(port, ' server is opened');
+const appServer = createServer(app);
+
+new NotificationController().init(appServer);
+
+appServer.listen(port, () => {
+  console.log(port, 'server is opened');
 });

@@ -1,8 +1,6 @@
-const { Comments } = require('../models');
-
 class CommentRepository {
-  constructor() {
-    this.commentsModel = Comments;
+  constructor(CommentsModel) {
+    this.commentsModel = CommentsModel;
   }
 
   createComment = async (comment, userId, todoId) => {
@@ -31,7 +29,7 @@ class CommentRepository {
       { comment },
       { where: { commentId } },
     );
-    console.log('updateComment',updateComment)
+    console.log('updateComment', updateComment);
     return updateComment;
   };
 
