@@ -8,10 +8,10 @@ const todoController = new TodoController();
 
 export const todoRouter = Router();
 
-todoRouter.get('/', todoController.findAllTodoList);
-todoRouter.post('/', authMiddleware, todoController.createTodo);
-todoRouter.put('/:todoId', authMiddleware, todoController.updateTodo);
-todoRouter.put('/:todoId/done', authMiddleware, todoController.doneTodo);
-todoRouter.put('/:todoId/like', authMiddleware, todoController.likeTodo);
-todoRouter.get('/:todoId', authMiddleware, todoController.findTodoList);
-todoRouter.delete('/:todoId', authMiddleware, todoController.deleteTodoList);
+todoRouter.get('/', (req, res) => todoController.findAllTodoList(req, res));
+todoRouter.post('/', authMiddleware, (req, res) => todoController.createTodo(req, res));
+todoRouter.put('/:todoId', authMiddleware, (req, res) => todoController.updateTodo(req, res));
+todoRouter.put('/:todoId/done', authMiddleware, (req, res) => todoController.doneTodo(req, res));
+todoRouter.put('/:todoId/like', authMiddleware, (req, res) => todoController.likeTodo(req, res));
+todoRouter.get('/:todoId', authMiddleware, (req, res) => todoController.findTodoList(req, res));
+todoRouter.delete('/:todoId', authMiddleware, (req, res) => todoController.deleteTodoList(req, res));
