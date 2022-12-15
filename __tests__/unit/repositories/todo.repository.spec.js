@@ -1,4 +1,4 @@
-const TodoRepository = require('../../../repositories/todo.repository');
+const TodoRepository = require('../../../repositories/todo.repository.js');
 
 // todo.repository.js 에서는 아래 5개의 Method만을 사용합니다.
 const mockTodoModel = {
@@ -10,6 +10,7 @@ const mockTodoModel = {
 };
 
 let todoRepository = new TodoRepository(mockTodoModel);
+
 describe('Layered Architecture Pattern TodoRepository Unit Test', () => {
   // 각 test가 실행되기 전에 실행됩니다.
   beforeEach(() => {
@@ -50,10 +51,31 @@ describe('Layered Architecture Pattern TodoRepository Unit Test', () => {
     expect(mockTodoModel.create).toHaveBeenCalledWith(createTodoParams);
   });
 
-  //   test('TodoRepository deleteTodoList Method ', async () => {
-  //     mockTodoModel.destroy = jest.fn(() => {
-  //       return 'deleted';
-  //     });
-  //     const remove = await todoRepository.deleteTodoList();
-  //   });
+  test('TodoRepository findTodoList Method', async () => {
+    mockTodoModel.findOne = jest.fn(() => {
+      return 'findOne String';
+    });
+    const todo = await todoRepository.findTodoList();
+    expect(todoRepository.todoModel.findOne).toHaveBeenCalledTimes(1);
+    expect(todo).toBe('findOne String');
+  });
+
+  test('TodoRepository deleteTodoList Method ', async () => {
+    mockTodoModel.destroy = jest.fn(() => {
+      return 'destroy String';
+    });
+    const remove = await todoRepository.deleteTodoList();
+    expect(todoRepository.todoModel.destroy).toHaveBeenCalledTimes(1);
+    expect(remove).toBe('destroy String');
+  });
+
+  test('TodoRepository updateTodo Method', async () => {
+    mockTodoModel.update = jest.fn(() => {
+      return 'update String';
+    });
+
+    const update = await todoRepository.updateTodo();
+    expect(todoRepository.todoModel.update).toHaveBeenCalledTimes(1);
+    expect(update).toBe('update String');
+  });
 });

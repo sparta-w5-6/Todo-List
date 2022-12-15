@@ -6,7 +6,8 @@
     "jest-cli": "^29.3.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.4"
   },
   "name": "w5_todoproject_6t",
   "description": "",
@@ -16,8 +17,11 @@
     "test": "NODE_ENV=development jest --forceExit",
     "test:silent": "jest --silent --forceExit",
     "test:coverage": "jest --coverage --forceExit",
-    "test:unit": "jest __tests__/unit/ --forceExit",
-    "test:integration": "jest __tests__/integration --forceExit",
+
+    "test:unit": "jest dist/__tests__/unit/services --forceExit",
+    "test:integration": "jest dist/__tests__/integration --forceExit",
+
+
     "build": "del dist && tsc",
     "start": "nodemon dist/app.js"
   },
