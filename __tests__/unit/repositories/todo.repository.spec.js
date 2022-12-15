@@ -69,14 +69,14 @@ describe('Layered Architecture Pattern TodoRepository Unit Test', () => {
     expect(remove).toBe('destroy String');
   });
 
-  //업데이트 에러있음!
-  // test('TodoRepository updateTodo Method', async () => {
-  //   mockTodoModel.update = jest.fn(() => {
-  //     return 'update String';
-  //   });
+  // 업데이트 에러있음!
+  test('TodoRepository updateTodo Method', async () => {
+    mockTodoModel.update = jest.fn(() => {
+      return 'update String';
+    });
 
-  //   const update = await todoRepository.updateTodo();
-  //   expect(todoRepository.todoModel.findOne).toHaveBeenCalledTimes(1);
-  //   expect(update).toBe('update String');
-  // });
+    const update = await todoRepository.updateTodo();
+    expect(todoRepository.todoModel.update).toHaveBeenCalledTimes(1);
+    expect(update).toBe('update String');
+  });
 });
