@@ -1,4 +1,6 @@
 const CommentService = require('../../../services/comment.service.js');
+const app = require('../../../app');
+const request = require('supertest');
 
 let mockCommentRepository = {
   findAllComment: jest.fn(),
@@ -54,4 +56,5 @@ describe('Layered Architecture Pattern Comment Service Unit Test', () => {
     // CommentRepository의 findAllComment Method는 1번 호출되었는지 검증합니다.
     expect(mockCommentRepository.findAllComment).toHaveBeenCalledTimes(1);
   });
+
 });

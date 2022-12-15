@@ -17,20 +17,22 @@ describe('Layered Architecture Pattern Comment Repository Unit Test', () => {
     jest.resetAllMocks(); // 모든 Mock을 초기화합니다.
   });
 
-  test('Comment Repository createComment Method', async () => {
+  test('Comment Repository findAllComment Method', async () => {
     // create Mock의 Return 값을 “findAll String”으로 설정합니다.
-    mockCommentModel.create = jest.fn(() => {
-      return 'create Return String';
+    mockCommentModel.findAll = jest.fn(() => {
+      return 'findAll String';
     });
 
     // commentRepository의 findAllComment Method를 호출합니다.
-    const comments = await commentRepository.findAllComment();
+    const comments = await commentRepository.findAllComment({});
+
+    expect(comments).toBe("findAll String");
 
     // commentsModel의 findAll은 1번만 호출 되었습니다.
     expect(commentRepository.commentsModel.findAll).toHaveBeenCalledTimes(1);
 
-    // mockPostsModel의 Return과 출력된 findAll Method의 값이 일치하는지 비교합니다.
-    expect(comments).toBe('findAll String');
+    // // mockPostsModel의 Return과 출력된 findAll Method의 값이 일치하는지 비교합니다.
+    // expect(comments).toBe('findAll String');
   });
 
     test('Comment Repository createComment Method', async () => {
