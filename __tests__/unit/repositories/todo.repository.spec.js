@@ -1,81 +1,46 @@
-const TodoRepository = require('../../../repositories/todo.repository.js');
+const SignupRepository = require('../../../repositories/signup.repository');
 
-// todo.repository.js 에서는 아래 5개의 Method만을 사용합니다.
-const mockTodoModel = {
-  findAll: jest.fn(),
-  findOne: jest.fn(),
-  create: jest.fn(),
-  update: jest.fn(),
-  destroy: jest.fn(),
-};
+const mockSignupModel = { registerUser: jest.fn(), findAllUser: jest.fn() };
 
-let todoRepository = new TodoRepository(mockTodoModel);
+let signupRepository = new SignupRepository();
+signupRepository.Users = mockSignupModel;
 
-describe('Layered Architecture Pattern TodoRepository Unit Test', () => {
-  // 각 test가 실행되기 전에 실행됩니다.
+describe('Signup Repository Layer test', () => {
   beforeEach(() => {
-    jest.resetAllMocks(); // 모든 Mock을 초기화합니다.
-  });
-  test('TodoRepository findAllTodoList Method ', async () => {
-    // findAll Mock의 Return 값을 "findAll String"으로 설정합니다.
-    mockTodoModel.findAll = jest.fn(() => {
-      return 'findAll String';
-    });
-    // todoRepository의 findAllTodoList Method를 호출합니다.
-    const todos = await todoRepository.findAllTodoList();
-    // todoModel의 findAll은 1번만 호출 되었습니다.
-    expect(todoRepository.todoModel.findAll).toHaveBeenCalledTimes(1);
-    // mockTodoModel의 Return과 출력된 findAll Method의 값이 일치하는지 비교합니다.
-    expect(todos).toBe('findAll String');
+    jest.resetAllMocks();
   });
 
-  test('TodoRepository createTodo Method ', async () => {
-    // create Mock의 Return 값을 "findAll String"으로 return 합니다
-    mockTodoModel.create = jest.fn(() => {
-      return 'create Return String';
-    });
-    //createTodo를 하기 위해 필요한 parameter를 선언해 준다
-    const createTodoParams = {
-      title: 'createTodoTitle',
-      item: 'createTodoItem',
-      isDone: false,
-      userId: 1,
+  // signup 에 create 메소드 테스트
+  test('create Method test', async () => {
+    const signupUserCreateParams = {
+      email: 'test@register.com',
+      nickname: 'testRegister',
+      password: 'testPW123',
     };
-    //TodoRepository의 createTodo Method 실행
-    const createTodoData = await todoRepository.createTodo(createTodoParams);
-    // createTodoData는 todoModel의 create를 실행한 결과 값을 반환하는지 검증
-    expect(createTodoData).toBe('create Return String');
-    // TodoRepository의 createTodo Method 실행했을 때, todoModel의 create를 1번만 실행
-    expect(mockTodoModel.create).toHaveBeenCalledTimes(1);
-    // TodoRepository의 createTodo Method 실행했을 때, todoModel의 create는 아래와 같이 호출한다
-    expect(mockTodoModel.create).toHaveBeenCalledWith(createTodoParams);
+    // 생성
+    await signupRepository.Users.registerUser(
+      signupUserCreateParams.email,
+      signupUserCreateParams.nickname,
+      signupUserCreateParams.password,
+    );
+
+    // create Method 가 1번 실행 됐는지
+    expect(signupRepository.Users.registerUser).toHaveBeenCalledTimes(1);
+
+    expect(signupRepository.Users.registerUser).toHaveBeenCalledWith(
+      'test@register.com',
+      'testRegister',
+      'testPW123',
+    );
   });
 
-  test('TodoRepository findTodoList Method', async () => {
-    mockTodoModel.findOne = jest.fn(() => {
-      return 'findOne String';
+  // signup 에 findAll 메소드 테스트
+  test('findAll Method test', async () => {
+    mockSignupModel.findAll = jest.fn(() => {
+      return 'test Signup findAll result';
     });
-    const todo = await todoRepository.findTodoList();
-    expect(todoRepository.todoModel.findOne).toHaveBeenCalledTimes(1);
-    expect(todo).toBe('findOne String');
-  });
-
-  test('TodoRepository deleteTodoList Method ', async () => {
-    mockTodoModel.destroy = jest.fn(() => {
-      return 'destroy String';
-    });
-    const remove = await todoRepository.deleteTodoList();
-    expect(todoRepository.todoModel.destroy).toHaveBeenCalledTimes(1);
-    expect(remove).toBe('destroy String');
-  });
-
-  test('TodoRepository updateTodo Method', async () => {
-    mockTodoModel.update = jest.fn(() => {
-      return 'update String';
-    });
-
-    const update = await todoRepository.updateTodo();
-    expect(todoRepository.todoModel.update).toHaveBeenCalledTimes(1);
-    expect(update).toBe('update String');
+    const signupFindAll = await signupRepository.findAllUser();
+    expect(mockSignupModel.findAll).toHaveBeenCalledTimes(1);
+    expect(signupFindAll).toEqual('test Signup findAll result');
   });
 });

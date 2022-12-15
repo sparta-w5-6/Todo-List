@@ -1,22 +1,46 @@
-const UserRepository = require('../../../repositories/user.repository');
+const SignupRepository = require('../../../repositories/signup.repository');
 
-const mockUserModel = { findOne: jest.fn() };
+const mockSignupModel = { registerUser: jest.fn(), findAllUser: jest.fn() };
 
-let userRepository = new UserRepository(mockUserModel);
-describe('User Repository layer test', () => {
+let signupRepository = new SignupRepository();
+signupRepository.Users = mockSignupModel;
+
+describe('Signup Repository Layer test', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  test('findOne Methods toHaveBeenCalled', async () => {
-    // mock 객체 생성
-    mockUserModel.findOne = jest.fn(() => {
-      return 'findOne result';
+  // signup 에 create 메소드 테스트
+  test('create Method test', async () => {
+    const signupUserCreateParams = {
+      email: 'test@register.com',
+      nickname: 'testRegister',
+      password: 'testPW123',
+    };
+    // 생성
+    await signupRepository.Users.registerUser(
+      signupUserCreateParams.email,
+      signupUserCreateParams.nickname,
+      signupUserCreateParams.password,
+    );
+
+    // create Method 가 1번 실행 됐는지
+    expect(signupRepository.Users.registerUser).toHaveBeenCalledTimes(1);
+
+    expect(signupRepository.Users.registerUser).toHaveBeenCalledWith(
+      'test@register.com',
+      'testRegister',
+      'testPW123',
+    );
+  });
+
+  // signup 에 findAll 메소드 테스트
+  test('findAll Method test', async () => {
+    mockSignupModel.findAll = jest.fn(() => {
+      return 'test Signup findAll result';
     });
-    const user = await userRepository.getUser();
-    // UserModel 에 있는 findOne 메소드는 1번만 호출되는지.
-    expect(mockUserModel.findOne).toHaveBeenCalledTimes(1);
-    // findUser메소드를 실행한 결과가 반환되는지
-    expect(user).toEqual('findOne result');
+    const signupFindAll = await signupRepository.findAllUser();
+    expect(mockSignupModel.findAll).toHaveBeenCalledTimes(1);
+    expect(signupFindAll).toEqual('test Signup findAll result');
   });
 });
