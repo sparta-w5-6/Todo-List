@@ -8,6 +8,7 @@ class SignupService {
   registerUser = async (email, nickname, password, confirm) => {
     const emailValidate = email.split('@'); // 이메일 형식 확인
     const existUser = await this.signupRepository.findAllUser(email, nickname);
+
     if (
       emailValidate.length !== 2 ||
       email[0] === '@' ||

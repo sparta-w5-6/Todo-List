@@ -1,5 +1,7 @@
 const CommentRepository = require('../repositories/comment.repository');
+
 const { TodoRepository } = require('../repositories/todo.repository');
+
 const { Comments, Todos } = require('../models');
 
 class CommentService {

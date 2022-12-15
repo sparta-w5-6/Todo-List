@@ -16,6 +16,11 @@ class SignupRepository {
     const findAllUsers = await this.SignupModel.findAll({
       where: { [Op.or]: [{ email }, { nickname }] },
     });
+    console.log(
+      '🚀 ~ file: signup.repository.js:19 ~ SignupRepository ~ findAllUser= ~ findAllUsers',
+      findAllUsers,
+    );
+
     return findAllUsers;
   };
 }
