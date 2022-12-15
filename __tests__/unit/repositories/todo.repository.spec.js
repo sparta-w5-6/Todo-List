@@ -69,7 +69,6 @@ describe('Layered Architecture Pattern TodoRepository Unit Test', () => {
     expect(remove).toBe('destroy String');
   });
 
-  // 업데이트 에러있음!
   test('TodoRepository updateTodo Method', async () => {
     mockTodoModel.update = jest.fn(() => {
       return 'update String';
