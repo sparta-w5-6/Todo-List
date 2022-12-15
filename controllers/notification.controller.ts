@@ -1,7 +1,7 @@
 import { Server as HttpServer } from 'http';
 import { Server as SocketServer, Socket } from 'socket.io';
 
-import { TodoService } from '../services/todo.service';
+import TodoService = require("../services/todo.service")
 
 const UserService = require('../services/user.service');
 const UserRepository = require('../repositories/user.repository');

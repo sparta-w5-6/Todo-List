@@ -3,7 +3,7 @@ const router = express.Router();
 
 const signupRouter = require('./signup.routes');
 
-const { todoRouter } = require('./todo.routes');
+const todoRouter = require('./todo.routes');
 
 const commentRouter = require('./comment.routes');
 const loginRouter = require('./login.routes');

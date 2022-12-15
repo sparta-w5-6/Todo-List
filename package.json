@@ -13,7 +13,6 @@
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "NODE_ENV=development jest --forceExit",
     "test:silent": "jest --silent --forceExit",

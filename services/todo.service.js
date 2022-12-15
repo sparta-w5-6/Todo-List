@@ -1,6 +1,5 @@
-const express = require('express');
-const { Users, Todos, Likes } = require('../models');
-const TodoRepository = require('../repositories/todo.repository.js');
+const {Todos} = require('../models');
+const TodoRepository = require('../repositories/todo.repository');
 const {
   InvalidParamsError,
   NotFoundError,
