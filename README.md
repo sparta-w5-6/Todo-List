@@ -6,6 +6,7 @@
 - 좋아요
 
 # 사용 스택
+
 - Node.js
 - TypeScript
 - Express.js
@@ -72,4 +73,17 @@ module.exports = {
 
 #ERD
 ![스크린샷 2022-12-12 오후 12 42 58](https://user-images.githubusercontent.com/105340187/206955920-fe8bfdd5-7945-4bc6-8b02-a7ad7a26e560.png)
+
+=======
+- node.js
+- express.js
+- sequelize
+- MySQL
+
+# API 명세서
+![스크린샷 2022-12-10 오전 12 26 40](https://user-images.githubusercontent.com/105340187/206837661-bb8ed203-36b8-436e-800f-4065a93dca85.png)
+
+
+#ERD
+![스크린샷 2022-12-10 오후 4 16 17](https://user-images.githubusercontent.com/105340187/206837691-29d267a6-7bf2-4823-9f7e-6a5e826303f8.png)
 
