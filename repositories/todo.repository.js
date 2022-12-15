@@ -1,7 +1,3 @@
-const express = require('express');
-const { Todos, Users, Likes } = require('../models');
-const { Op } = require('sequelize');
-
 class TodoRepository {
   constructor(TodoModel) {
     this.todoModel = TodoModel;

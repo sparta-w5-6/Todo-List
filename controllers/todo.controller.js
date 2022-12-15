@@ -1,5 +1,3 @@
-const express = require('expres');
-const { Todos, Users, Likes } = require('../models');
 const TodoService = require('../services/todo.service');
 class TodoController {
   TodoService = new TodoService();
