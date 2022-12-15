@@ -13,7 +13,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit",
+    "test": "NODE_ENV=development jest --forceExit",
     "test:silent": "jest --silent --forceExit",
     "test:coverage": "jest --coverage --forceExit",
     "test:unit": "jest __tests__/unit/ --forceExit",

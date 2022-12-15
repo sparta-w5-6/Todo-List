@@ -28,6 +28,7 @@ class LoginService {
     }
     const expires = new Date();
     expires.setHours(expires.getHours() + 10);
+
     const token = jwt.sign(
       { userId: user.userId, email: user.email, nickname: user.nickname },
       SECRET_KEY,
